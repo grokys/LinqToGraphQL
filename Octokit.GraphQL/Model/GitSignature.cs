@@ -54,6 +54,7 @@ namespace Octokit.GraphQL.Model.Internal
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
     using Octokit.GraphQL.Core;
     using Octokit.GraphQL.Core.Builders;
@@ -64,18 +65,25 @@ namespace Octokit.GraphQL.Model.Internal
         {
         }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public string Email { get; }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public bool IsValid { get; }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public string Payload { get; }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public string Signature { get; }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public User Signer => this.CreateProperty(x => x.Signer, Octokit.GraphQL.Model.User.Create);
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public GitSignatureState State { get; }
 
+        [SuppressMessage("System.Diagnostics", "CS1591", Justification = "Source did not provide summary")]
         public bool WasSignedByGitHub { get; }
 
         internal static StubIGitSignature Create(Expression expression)

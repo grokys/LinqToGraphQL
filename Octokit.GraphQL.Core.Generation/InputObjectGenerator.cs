@@ -16,6 +16,7 @@ namespace Octokit.GraphQL.Core.Generation
 {{
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     {GenerateDocComments(type)}public class {className}
     {{{GenerateFields(type)}
@@ -83,7 +84,9 @@ namespace Octokit.GraphQL.Core.Generation
             }
             else
             {
-                return null;
+                var builder = new StringBuilder();
+                DocCommentGenerator.GenerateSupressMessage(8, builder);
+                return builder.ToString();
             }
         }
     }
