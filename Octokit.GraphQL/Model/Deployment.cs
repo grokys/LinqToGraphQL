@@ -50,7 +50,7 @@ namespace Octokit.GraphQL.Model
         /// </summary>
         public string Environment { get; }
 
-        public ID Id { get; }
+        public string Id { get; }
 
         /// <summary>
         /// The latest environment to which this deployment was made.

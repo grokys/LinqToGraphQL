@@ -7,31 +7,6 @@ namespace Octokit.GraphQL.Core.Generation.Utilities
 {
     internal static class TypeUtilities
     {
-        public static string GetCSharpLiteral(string value, TypeModel type)
-        {
-            if (type.Kind == TypeKind.Scalar)
-            {
-                if (type.Name == "String" || type.Name == "ID")
-                {
-                    return value == null ? "null" : $"\"{value}\"";
-                }
-                else
-                {
-                    return value;
-                }
-            }
-            else if (type.Kind == TypeKind.Enum)
-            {
-                return $"{type.Name}.{value.SnakeCaseToPascalCase()}";
-            }
-            else if (type.Kind == TypeKind.NonNull)
-            {
-                return GetCSharpLiteral(value, type.OfType);
-            }
-
-            throw new NotImplementedException();
-        }
-
         public static string GetCSharpReturnType(TypeModel type)
         {
             return GetCSharpType(ReduceType(type), type.Kind != TypeKind.NonNull, true);
@@ -126,7 +101,6 @@ namespace Octokit.GraphQL.Core.Generation.Utilities
                         case "Float": return "double" + question;
                         case "String": return "string";
                         case "Boolean": return "bool" + question;
-                        case "ID": return "ID" + question;
                         case "GitTimeStamp": return "DateTimeOffset" + question;
                         case "DateTime": return "DateTimeOffset" + question;
                         default: return "string";
@@ -152,12 +126,7 @@ namespace Octokit.GraphQL.Core.Generation.Utilities
         private static bool IsValueType(TypeModel type)
         {
             return type.Kind == TypeKind.Enum ||
-                (type.Kind == TypeKind.Scalar && 
-                   (type.Name == "Int" ||
-                    type.Name == "Float" || 
-                    type.Name == "Boolean" || 
-                    type.Name == "DateTime" ||
-                    type.Name == "ID"));
+                (type.Kind == TypeKind.Scalar && (type.Name == "Int" || type.Name == "Float" || type.Name == "Boolean" || type.Name == "DateTime"));
         }
     }
 }
